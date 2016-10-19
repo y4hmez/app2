@@ -20,7 +20,7 @@ namespace App2
         //if we have to we can fake some injection at this point..
         public static ViewModel Instance => Lazy.Value;
 
-        public ViewModel() { } //public default for XAML
+        public ViewModel(){ } //public default for XAML
 
         private ViewModel(Barometer barometer)
         {
@@ -29,6 +29,8 @@ namespace App2
             SetUpListenerAsync();
 
             _barometer.ReadingChanged += _barometer_ReadingChanged;
+
+            Test = 15.8;
         }
 
         private void _barometer_ReadingChanged(Barometer sender, BarometerReadingChangedEventArgs args)
@@ -42,6 +44,14 @@ namespace App2
         {
             get { return _pressure; }
             set { this.RaiseAndSetIfChanged(ref _pressure, value); }
+        }
+
+        private double _test;
+
+        public double Test
+        {
+            get { return _test; }
+            set { this.RaiseAndSetIfChanged(ref _test, value); }
         }
 
 

@@ -10,11 +10,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.DataContext>
-            <local:ViewModel/>
-        </Grid.DataContext>
+        <StackPanel>
+            <TextBlock x:Name="PresureLabel" TextWrapping="Wrap" Text="Pressure" />
+            <!--<TextBlock x:Name="RateOfClimb" TextWrapping="Wrap" Text="{x:Bind Vm.RateOfClimb, Mode=OneWay}" />-->
+            <TextBlock x:Name="Pressure" TextWrapping="Wrap" Text="{x:Bind Vm.Pressure, Mode=OneWay, FallbackValue=45.5}" />
+        </StackPanel>
         <controls:RadialGauge x:Name="RadialGaugeControl"	
-	        Value="{Binding Pressure}"
+	        
+            Value="{x:Bind Vm.Test, FallbackValue=45.5}"
 	        Minimum="0"
 	        Maximum="180"
 	        TickSpacing="20"
@@ -26,14 +29,7 @@
 	        ValueBrush="Black" 
 	        NeedleWidth="5" 
 	        TickLength="18">
-            <controls:RadialGauge.DataContext>
-                <local:ViewModel />
-            </controls:RadialGauge.DataContext>
         </controls:RadialGauge>
-        <StackPanel>
-            <TextBlock x:Name="PresureLabel" TextWrapping="Wrap" Text="Pressure" />
-            <TextBlock x:Name="RateOfClimb" TextWrapping="Wrap" Text="{x:Bind Vm.RateOfClimb, Mode=OneWay}" />
-            <TextBlock x:Name="Pressure" TextWrapping="Wrap" Text="{x:Bind Vm.Pressure, Mode=OneWay}" />
-        </StackPanel>
+        
     </Grid>
 </Page>
