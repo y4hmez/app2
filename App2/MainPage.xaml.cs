@@ -24,20 +24,14 @@ namespace App2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly DisplayRequest dispRequest;
-
         public ViewModel Vm;
 
         public MainPage()
         {
-            this.InitializeComponent();
-            var x = this.RadialGaugeControl.MinAngle;
-            this.RadialGaugeControl.Maximum = 4;
-            this.RadialGaugeControl.Minimum = -4;
-
-            dispRequest = new DisplayRequest();
-            dispRequest.RequestActive();
-
+            InitializeComponent();            
+            
+            new DisplayRequest().RequestActive();
+            
             Vm = ViewModel.Instance;
         }
     }

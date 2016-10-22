@@ -7,7 +7,7 @@ namespace App2.Controls
     /// <summary>
     /// Internal class used to provide helpers for controls
     /// </summary>
-    internal static partial class ControlHelpers
+    internal static class ControlHelpers
     {
         /// <summary>
         /// Get the visual associated with an UIElement

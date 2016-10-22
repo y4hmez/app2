@@ -19,6 +19,9 @@
 
         <controls:VarioGauge x:Name="RadialGaugeControl"		        
             Value="{x:Bind Vm.RateOfClimb, Mode=OneWay}"	        
+                             
+            Minimum="-4"
+            Maximum="4"
 	        
 	        ScaleWidth="40"
 	        Unit="Units"
