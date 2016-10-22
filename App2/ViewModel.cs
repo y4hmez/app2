@@ -72,7 +72,8 @@ namespace App2
             () =>
             {
                 var seq = Observable.FromEventPattern<TypedEventHandler<Barometer, BarometerReadingChangedEventArgs>, BarometerReadingChangedEventArgs>(h => _barometer.ReadingChanged += h, h => _barometer.ReadingChanged -= h, RxApp.TaskpoolScheduler);
-                seq.Buffer(2, 1).Select(r =>
+                seq.DistinctUntilChanged()
+                .Buffer(2, 1).Select(r =>
                 {
                     UnitsNet.Length dHeight = r[1].EventArgs.Reading.Pressure().GetHeightFromPressure() -
                                               r[0].EventArgs.Reading.Pressure().GetHeightFromPressure();
