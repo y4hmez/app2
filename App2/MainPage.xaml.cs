@@ -31,6 +31,9 @@ namespace App2
         public MainPage()
         {
             this.InitializeComponent();
+            var x = this.RadialGaugeControl.MinAngle;
+            this.RadialGaugeControl.Maximum = 4;
+            this.RadialGaugeControl.Minimum = -4;
 
             dispRequest = new DisplayRequest();
             dispRequest.RequestActive();

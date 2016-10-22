@@ -11,25 +11,23 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
-            <TextBlock x:Name="PresureLabel" TextWrapping="Wrap" Text="Pressure" />
-            <!--<TextBlock x:Name="RateOfClimb" TextWrapping="Wrap" Text="{x:Bind Vm.RateOfClimb, Mode=OneWay}" />-->
-            <TextBlock x:Name="Pressure" TextWrapping="Wrap" Text="{x:Bind Vm.Pressure, Mode=OneWay, FallbackValue=45.5}" />
+            <!--<TextBlock x:Name="PresureLabel" TextWrapping="Wrap" Text="Pressure" />
+            <TextBlock x:Name="RateOfClimb" TextWrapping="Wrap" Text="{x:Bind Vm.RateOfClimb, Mode=OneWay}" />
+            <TextBlock x:Name="Pressure" TextWrapping="Wrap" Text="{x:Bind Vm.Pressure, Mode=OneWay, FallbackValue=45.5}" />-->
         </StackPanel>
-        <controls:RadialGauge x:Name="RadialGaugeControl"	
-	        
-            Value="{x:Bind Vm.Test, FallbackValue=45.5}"
-	        Minimum="0"
-	        Maximum="180"
+        <controls:RadialGauge x:Name="RadialGaugeControl"		        
+            Value="{x:Bind Vm.RateOfClimb, Mode=OneWay}"	        
 	        TickSpacing="20"
-	        ScaleWidth="26"
+	        ScaleWidth="40"
 	        Unit="Units"
 	        TickBrush="Gainsboro"
 	        ScaleTickBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 	        UnitBrush="Black"
-	        ValueBrush="Black" 
-	        NeedleWidth="5" 
-	        TickLength="18">
+	        ValueBrush="Black"                     
+	        TickLength="0.0"
+            MinAngle="-240"
+            MaxAngle="50">
         </controls:RadialGauge>
-        
+
     </Grid>
 </Page>
