@@ -83,18 +83,6 @@ namespace App2.Controls
             DependencyProperty.Register(nameof(ScaleBrush), typeof(Brush), typeof(VarioGauge), new PropertyMetadata(new SolidColorBrush(Colors.DarkGray)));
 
         /// <summary>
-        /// Identifies the ScaleTickBrush dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ScaleTickBrushProperty =
-            DependencyProperty.Register(nameof(ScaleTickBrush), typeof(Brush), typeof(VarioGauge), new PropertyMetadata(new SolidColorBrush(Colors.Black), OnFaceChanged));
-
-        /// <summary>
-        /// Identifies the TickBrush dependency property.
-        /// </summary>
-        public static readonly DependencyProperty TickBrushProperty =
-            DependencyProperty.Register(nameof(TickBrush), typeof(SolidColorBrush), typeof(VarioGauge), new PropertyMetadata(new SolidColorBrush(Colors.White), OnFaceChanged));
-
-        /// <summary>
         /// Identifies the ValueBrush dependency property.
         /// </summary>
         public static readonly DependencyProperty ValueBrushProperty =
@@ -111,13 +99,7 @@ namespace App2.Controls
         /// </summary>
         public static readonly DependencyProperty ValueStringFormatProperty =
             DependencyProperty.Register(nameof(ValueStringFormat), typeof(string), typeof(VarioGauge), new PropertyMetadata("N0"));
-
-        /// <summary>
-        /// Identifies the TickSpacing dependency property.
-        /// </summary>
-        public static readonly DependencyProperty TickSpacingProperty =
-        DependencyProperty.Register(nameof(TickSpacing), typeof(int), typeof(VarioGauge), new PropertyMetadata(10, OnFaceChanged));
-
+        
         /// <summary>
         /// Identifies the NeedleLength dependency property.
         /// </summary>
@@ -136,23 +118,6 @@ namespace App2.Controls
         public static readonly DependencyProperty ScalePaddingProperty =
             DependencyProperty.Register(nameof(ScalePadding), typeof(double), typeof(VarioGauge), new PropertyMetadata(23d, OnFaceChanged));
 
-        /// <summary>
-        /// Identifies the ScaleTickWidth dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ScaleTickWidthProperty =
-            DependencyProperty.Register(nameof(ScaleTickWidth), typeof(double), typeof(VarioGauge), new PropertyMetadata(2.5, OnFaceChanged));
-
-        /// <summary>
-        /// Identifies the TickWidth dependency property.
-        /// </summary>
-        public static readonly DependencyProperty TickWidthProperty =
-            DependencyProperty.Register(nameof(TickWidth), typeof(double), typeof(VarioGauge), new PropertyMetadata(5d, OnFaceChanged));
-
-        /// <summary>
-        /// Identifies the TickLength dependency property.
-        /// </summary>
-        public static readonly DependencyProperty TickLengthProperty =
-            DependencyProperty.Register(nameof(TickLength), typeof(double), typeof(VarioGauge), new PropertyMetadata(18d, OnFaceChanged));
 
         /// <summary>
         /// Identifies the MinAngle dependency property.
@@ -285,24 +250,6 @@ namespace App2.Controls
         }
 
         /// <summary>
-        /// Gets or sets the scale tick brush.
-        /// </summary>
-        public SolidColorBrush ScaleTickBrush
-        {
-            get { return (SolidColorBrush)GetValue(ScaleTickBrushProperty); }
-            set { SetValue(ScaleTickBrushProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the outer tick brush.
-        /// </summary>
-        public SolidColorBrush TickBrush
-        {
-            get { return (SolidColorBrush)GetValue(TickBrushProperty); }
-            set { SetValue(TickBrushProperty, value); }
-        }
-
-        /// <summary>
         /// Gets or sets the brush for the displayed value.
         /// </summary>
         public Brush ValueBrush
@@ -330,15 +277,6 @@ namespace App2.Controls
         }
 
         /// <summary>
-        /// Gets or sets the tick spacing, in units.
-        /// </summary>
-        public int TickSpacing
-        {
-            get { return (int)GetValue(TickSpacingProperty); }
-            set { SetValue(TickSpacingProperty, value); }
-        }
-
-        /// <summary>
         /// Gets or sets the needle length, in percentage of the gauge radius.
         /// </summary>
         public double NeedleLength
@@ -363,33 +301,6 @@ namespace App2.Controls
         {
             get { return (double)GetValue(ScalePaddingProperty); }
             set { SetValue(ScalePaddingProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the width of the scale ticks, in percentage of the gauge radius.
-        /// </summary>
-        public double ScaleTickWidth
-        {
-            get { return (double)GetValue(ScaleTickWidthProperty); }
-            set { SetValue(ScaleTickWidthProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the length of the ticks, in percentage of the gauge radius.
-        /// </summary>
-        public double TickLength
-        {
-            get { return (double)GetValue(TickLengthProperty); }
-            set { SetValue(TickLengthProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the width of the ticks, in percentage of the gauge radius.
-        /// </summary>
-        public double TickWidth
-        {
-            get { return (double)GetValue(TickWidthProperty); }
-            set { SetValue(TickWidthProperty, value); }
         }
 
         /// <summary>
@@ -584,33 +495,6 @@ namespace App2.Controls
             varioGauge._root = container.GetVisual();
             varioGauge._root.Children.RemoveAll();
             varioGauge._compositor = varioGauge._root.Compositor;
-
-
-
-            // Ticks.
-            SpriteVisual tick;
-            for (double i = varioGauge.Minimum; i <= varioGauge.Maximum; i += varioGauge.TickSpacing)
-            {
-                tick = varioGauge._compositor.CreateSpriteVisual();
-                tick.Size = new Vector2((float)varioGauge.TickWidth, (float)varioGauge.TickLength);
-                tick.Brush = varioGauge._compositor.CreateColorBrush(varioGauge.TickBrush.Color);
-                tick.Offset = new Vector3(100 - ((float)varioGauge.TickWidth / 2), 0.0f, 0);
-                tick.CenterPoint = new Vector3((float)varioGauge.TickWidth / 2, 100.0f, 0);
-                tick.RotationAngleInDegrees = (float)varioGauge.ValueToAngle(i);
-                varioGauge._root.Children.InsertAtTop(tick);
-            }
-
-            // Scale Ticks.
-            for (double i = varioGauge.Minimum; i <= varioGauge.Maximum; i += varioGauge.TickSpacing)
-            {
-                tick = varioGauge._compositor.CreateSpriteVisual();
-                tick.Size = new Vector2((float)varioGauge.ScaleTickWidth, (float)varioGauge.ScaleWidth);
-                tick.Brush = varioGauge._compositor.CreateColorBrush(varioGauge.ScaleTickBrush.Color);
-                tick.Offset = new Vector3(100 - ((float)varioGauge.ScaleTickWidth / 2), (float)varioGauge.ScalePadding, 0);
-                tick.CenterPoint = new Vector3((float)varioGauge.ScaleTickWidth / 2, 100 - (float)varioGauge.ScalePadding, 0);
-                tick.RotationAngleInDegrees = (float)varioGauge.ValueToAngle(i);
-                varioGauge._root.Children.InsertAtTop(tick);
-            }
 
             // Needle.
             varioGauge._needle = varioGauge._compositor.CreateSpriteVisual();

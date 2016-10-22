@@ -19,14 +19,13 @@
 
         <controls:VarioGauge x:Name="RadialGaugeControl"		        
             Value="{x:Bind Vm.RateOfClimb, Mode=OneWay}"	        
-	        TickSpacing="20"
+	        
 	        ScaleWidth="40"
 	        Unit="Units"
-	        TickBrush="Gainsboro"
-	        ScaleTickBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	        
 	        UnitBrush="Black"
 	        ValueBrush="Black"                     
-	        TickLength="0.0"
+	        
             MinAngle="-240"
             MaxAngle="50">
         </controls:VarioGauge>
