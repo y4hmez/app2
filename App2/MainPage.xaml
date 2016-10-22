@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:App2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+    xmlns:controls="using:App2.Controls"
     RequestedTheme="Dark"
     mc:Ignorable="d">
 
@@ -15,7 +15,9 @@
             <TextBlock x:Name="RateOfClimb" TextWrapping="Wrap" Text="{x:Bind Vm.RateOfClimb, Mode=OneWay}" />
             <TextBlock x:Name="Pressure" TextWrapping="Wrap" Text="{x:Bind Vm.Pressure, Mode=OneWay, FallbackValue=45.5}" />-->
         </StackPanel>
-        <controls:RadialGauge x:Name="RadialGaugeControl"		        
+        
+
+        <controls:VarioGauge x:Name="RadialGaugeControl"		        
             Value="{x:Bind Vm.RateOfClimb, Mode=OneWay}"	        
 	        TickSpacing="20"
 	        ScaleWidth="40"
@@ -27,7 +29,7 @@
 	        TickLength="0.0"
             MinAngle="-240"
             MaxAngle="50">
-        </controls:RadialGauge>
+        </controls:VarioGauge>
 
     </Grid>
 </Page>
