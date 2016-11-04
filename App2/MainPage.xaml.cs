@@ -25,12 +25,19 @@ namespace App2
     public sealed partial class MainPage : Page
     {
         public ViewModel Vm;
+        
+        private DisplayRequest _displayRequest = new Lazy<DisplayRequest>(() =>
+        {
+            var dr = new DisplayRequest();
+            dr.RequestActive();
+            return dr;
+        }).Value;
 
         public MainPage()
         {
             InitializeComponent();            
             
-            new DisplayRequest().RequestActive();
+            //new DisplayRequest().RequestActive();
             
             Vm = ViewModel.Instance;
         }
